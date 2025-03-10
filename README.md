@@ -1,8 +1,16 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 # MoonShine 3 blank project
 
 ---
+
+| Settings                          |
+|-----------------------------------|
+| ✅ Enable authentication?          |
+| ✅ Install with system migrations? |
+| ⛔ Enable notifications?           |
+| ✅ Base theme                      |
+
+---
+
 | Included         |
 |------------------|
 | ✅ Basic setting  |
@@ -21,16 +29,6 @@
 
 ## About
 This is a Blank Moonshine 3 based on the [laravel-blank](https://github.com/dev-lnk/laravel-blank) project.
-
-## MoonShine Settings
----
-| Settings                          |
-|-----------------------------------|
-| ✅ Enable authentication?          |
-| ✅ Install with system migrations? |
-| ⛔ Enable notifications?           |
-| ✅ Base theme                      |
-
 
 ## Docker
 
