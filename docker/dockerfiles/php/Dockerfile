@@ -51,7 +51,8 @@ RUN pecl install xdebug-3.4.1 && \
 
 COPY . .
 
-RUN chmod -R 775 ./storage ./bootstrap/cache
+RUN php artisan storage:link && \
+    chmod -R 775 ./storage ./bootstrap/cache
 
 COPY ./docker/dockerfiles/php/config/entrypoint-dev.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
