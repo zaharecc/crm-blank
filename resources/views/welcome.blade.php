@@ -24,8 +24,8 @@
 </header>
 <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
     <main class="max-w-[335px]">
-        <a href="/admin" class="text-lg underline">Go to Admin</a>
-        <p class="mt-8">Login: admin@mail.ru</p>
+        <a href="{{ route('moonshine.login') }}" class="text-lg underline">Go to Admin</a>
+        <p class="mt-8">Login: admin@mail.com</p>
         <p>Password: 12345</p>
     </main>
 </div>

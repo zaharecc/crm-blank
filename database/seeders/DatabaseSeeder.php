@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         MoonShineUser::query()->create([
-            'name' => 'admin@mail.ru',
-            'email' => 'admin@mail.ru',
+            'name' => 'admin@mail.com',
+            'email' => 'admin@mail.com',
             'password' => Hash::make(12345)
         ]);
     }
