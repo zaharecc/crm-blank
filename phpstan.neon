@@ -1,10 +1,10 @@
 includes:
-    - vendor/larastan/larastan/extension.neon
+    - tools/larastan/vendor/larastan/larastan/extension.neon
 
 parameters:
     editorUrl: 'anything'
     editorUrlTitle: "\nat %%relFile%%:%%line%%"
-    level: max
+    level: 8
     paths:
         - app
         - tests

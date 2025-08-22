@@ -6,6 +6,9 @@ namespace App\MoonShine\Resources;
 
 use MoonShine\Laravel\Enums\Action;
 use MoonShine\Laravel\Models\MoonshineUserRole;
+use MoonShine\Laravel\Pages\Crud\DetailPage;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
@@ -14,13 +17,14 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
+use Stringable;
 
+/**
+ * @extends ModelResource<MoonshineUserRole, IndexPage, FormPage, DetailPage>
+ */
 #[Icon('bookmark')]
 #[Group('moonshine::ui.resource.system', 'users', translatable: true)]
 #[Order(1)]
-/**
- * @extends ModelResource<MoonshineUserRole>
- */
 class MoonShineUserRoleResource extends ModelResource
 {
     protected string $model = MoonshineUserRole::class;
@@ -70,7 +74,7 @@ class MoonShineUserRoleResource extends ModelResource
     }
 
     /**
-     * @return array{name: array|string}
+     * @return array<string, string[]|string|list<\Illuminate\Contracts\Validation\Rule>|list<Stringable>>
      */
     protected function rules($item): array
     {

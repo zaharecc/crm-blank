@@ -5,6 +5,7 @@
 /storage/*.key
 /storage/pail
 /vendor
+/**/vendor
 /fixer/vendor
 .env
 .env.backup

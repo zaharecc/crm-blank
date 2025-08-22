@@ -2,7 +2,7 @@ FROM php:8.4-fpm AS php
 
 WORKDIR /var/www/app
 
-ARG user
+ARG gid
 ARG uid
 
 RUN apt-get update && apt-get install -y \
@@ -26,44 +26,39 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-RUN pecl install redis
+RUN pecl install redis \
+    && docker-php-ext-enable redis
 
 COPY --from=composer:2.8.5 /usr/bin/composer /usr/bin/composer
 
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+RUN groupadd -g ${gid} app-user && useradd -u ${uid} -g app-user -m -s /bin/bash app-user
+RUN mkdir -p /var/www/app && chown -R app-user:app-user /var/www/app
 
 FROM php AS dev
-
-COPY ./docker/dockerfiles/php/config/php-dev.ini /usr/local/etc/php/conf.d/php.ini
-COPY ./docker/dockerfiles/php/config/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-COPY ./docker/dockerfiles/php/config/php-fpm-dev.conf /usr/local/etc/php-fpm-dev.d/www.conf
 
 ARG xdebug_idekey
 ARG xdebug_client_port
 
-RUN pecl install xdebug-3.4.1 && \
+COPY ./docker/config/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN pecl install xdebug-3.4.5 && \
       docker-php-ext-enable xdebug && \
       sed -i "s/^xdebug\.idekey=.*/xdebug.idekey=${xdebug_idekey}/" /usr/local/etc/php/conf.d/xdebug.ini && \
       sed -i "s/^xdebug\.client_port=.*/xdebug.client_port=${xdebug_client_port}/" /usr/local/etc/php/conf.d/xdebug.ini
 
 COPY . .
 
+COPY ./docker/config/php/entrypoint-dev.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 RUN chmod -R 775 ./storage ./bootstrap/cache
 
-COPY ./docker/dockerfiles/php/config/entrypoint-dev.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+USER app-user
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
 
-USER $user
-
 FROM php AS build
-
-COPY ./docker/dockerfiles/php/config/php-prod.ini /usr/local/etc/php/conf.d/php.ini
-COPY ./docker/dockerfiles/php/config/php-fpm-prod.conf /usr/local/etc/php-fpm.d/www.conf
 
 COPY composer.json composer.lock ./
 
@@ -74,18 +69,16 @@ COPY . .
 RUN composer dump-autoload --optimize && \
     composer check-platform-reqs
 
-RUN php artisan storage:link && \
-    chmod -R 775 ./storage ./bootstrap/cache
+RUN chmod -R 775 ./storage ./bootstrap/cache
 
 FROM build AS prod
-COPY ./docker/dockerfiles/php/config/entrypoint-prod.sh /usr/local/bin/entrypoint.sh
+COPY ./docker/config/php/entrypoint-prod.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN rm -rf /docker
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
 
 FROM build AS worker
-COPY ./docker/dockerfiles/php/config/supervisord.conf /etc/supervisor/supervisord.conf
 RUN rm -rf /docker
 CMD ["/bin/sh", "-c", "supervisord -c /etc/supervisor/supervisord.conf"]
 

@@ -9,8 +9,11 @@ use Illuminate\Validation\Rule;
 use MoonShine\Laravel\Enums\Action;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Models\MoonshineUser;
-use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Laravel\Models\MoonshineUserRole;
+use MoonShine\Laravel\Pages\Crud\DetailPage;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
+use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\Icon;
@@ -28,19 +31,21 @@ use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Password;
 use MoonShine\UI\Fields\PasswordRepeat;
 use MoonShine\UI\Fields\Text;
+use Stringable;
 
+/**
+ * @extends ModelResource<MoonShineUser, IndexPage, FormPage, DetailPage>
+ */
 #[Icon('users')]
 #[Group('moonshine::ui.resource.system', 'users', translatable: true)]
 #[Order(1)]
-/**
- * @extends ModelResource<MoonshineUser>
- */
 class MoonShineUserResource extends ModelResource
 {
     protected string $model = MoonshineUser::class;
 
     protected string $column = 'name';
 
+    /** @var string[] */
     protected array $with = ['moonshineUserRole'];
 
     protected bool $simplePaginate = true;
@@ -142,7 +147,7 @@ class MoonShineUserResource extends ModelResource
     }
 
     /**
-     * @return array{name: array|string, moonshine_user_role_id: array|string, email: array|string, password: array|string}
+     * @return array<string, string[]|string|list<Rule>|list<Stringable>>
      */
     protected function rules($item): array
     {
