@@ -22,14 +22,14 @@
 | ✅ Docker        |
 
 ## Installation
-- Run the git clone command `git clone git@github.com:dev-lnk/moonshine-blank.git .`.
+- Run the git clone command `git clone git@github.com:zaharecc/crm-blank.git .`.
 - Copy the `.env.example` file and rename it to `.env`, customize the `#Docker` section to your needs.
 - Run the command `make build`, and then `make install`.
 - Check the application's operation using the link `http://localhost/admin` or `http://localhost/admin:${APP_WEB_PORT}`.
 - Run stat analysis and tests using the command `make check`.
 
 ## About
-This is a Blank Moonshine 3 based on the [laravel-blank](https://github.com/dev-lnk/laravel-blank) project.
+This is a Blank Admin panel based on the [laravel-blank](https://github.com/dev-lnk/laravel-blank) project.
 
 ## Docker
 
