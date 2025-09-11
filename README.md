@@ -1,4 +1,4 @@
-# MoonShine 3 blank project
+# CRM blank project
 
 ---
 
@@ -6,7 +6,7 @@
 |----------------------------------|
 | ✅ Enable authentication          |
 | ✅ Install with system migrations |
-| ⛔ Enable notifications           |
+| ✅ Enable notifications           |
 | ✅ Base theme                     |
 
 ---
