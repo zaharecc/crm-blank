@@ -5,21 +5,34 @@ declare(strict_types=1);
 namespace App\MoonShine\Layouts;
 
 use MoonShine\ColorManager\ColorManager;
-use MoonShine\Contracts\AssetManager\AssetElementContract;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
-use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\UI\Components\{
-    Assets,
-    Favicon,
-    Header,
-    Head,
-    Logo,
-    Meta,
-    Profile
-};
-use MoonShine\UI\Components\{
-    Layout\Layout
-};
+use MoonShine\Laravel\Components\Layout\{Locales, Notifications, Search};
+use MoonShine\Laravel\Resources\MoonShineUserResource;
+use MoonShine\Laravel\Resources\MoonShineUserRoleResource;
+use MoonShine\MenuManager\MenuGroup;
+use MoonShine\MenuManager\MenuItem;
+use MoonShine\UI\Components\{Breadcrumbs,
+    Components,
+    Layout\Flash,
+    Layout\Div,
+    Layout\Body,
+    Layout\Burger,
+    Layout\Content,
+    Layout\Footer,
+    Layout\Head,
+    Layout\Favicon,
+    Layout\Assets,
+    Layout\Meta,
+    Layout\Header,
+    Layout\Html,
+    Layout\Layout,
+    Layout\Logo,
+    Layout\Menu,
+    Layout\Sidebar,
+    Layout\ThemeSwitcher,
+    Layout\TopBar,
+    Layout\Wrapper,
+    When};
 
 final class MoonShineLayout extends AppLayout
 {
