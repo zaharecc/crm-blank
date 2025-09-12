@@ -1,0 +1,28 @@
+.rounded-lg {
+/*border-radius: var(--radius-lg);*/ /* 0.5rem (8px) */
+border-radius: 0.5rem;
+}
+
+.table-list tbody tr {
+    /*    background-color: #e8de8f; */
+}
+
+.table-list{border-collapse:separate;--tw-border-spacing-x: .125rem;--tw-border-spacing-y: .125rem;border-spacing:var(--tw-border-spacing-x) var(--tw-border-spacing-y)}
+
+ 
+
+.table-list tbody td, .table-list tbody th, .table-list tbody tr {
+    padding: .5rem .25rem;
+	border: 1px solid;
+    border-color: #9d8c8c70;
+	
+}
+
+html {
+    
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 130%;
+    
+    padding: 10px;
+}
