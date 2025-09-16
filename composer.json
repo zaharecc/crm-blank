@@ -53,7 +53,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
-            "@php -r \"mkdir('lang/vendor/moonshine/ru'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/auth.php', 'lang/vendor/moonshine/ru/auth.php'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/pagination.php', 'lang/vendor/moonshine/ru/pagination.php'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/ui.php', 'lang/vendor/moonshine/ru/ui.php'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/validation.php', 'lang/vendor/moonshine/ru/validation.php');\"",
+            "php -r \"mkdir('lang/vendor/moonshine/ru'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/auth.php', 'lang/vendor/moonshine/ru/auth.php'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/pagination.php', 'lang/vendor/moonshine/ru/pagination.php'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/ui.php', 'lang/vendor/moonshine/ru/ui.php'); copy('/zaharecc/moonshine/src/Laravel/lang/vendor/moonshine/ru/validation.php', 'lang/vendor/moonshine/ru/validation.php');\"",
             "@php artisan migrate --graceful --ansi"
         ],
         "dev": [
