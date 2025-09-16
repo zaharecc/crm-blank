@@ -12,7 +12,8 @@
         "php": "^8.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10",
-        "zaharecc/moonshine": "^3.7"
+        "zaharecc/moonshine": "^3.7",
+        "moonshine/ru": "^1.0"
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.8",
